@@ -1,4 +1,4 @@
 public class Laadpunt {
-    boolean isOrderActive;
-    double depositAmount;
+    private boolean isOrderActive;
+    private double depositAmount;
 }

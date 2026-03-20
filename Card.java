@@ -1,4 +1,5 @@
 public class Card {
+    //    INIT
     private int cardID = 1;
     private String expiry = "01/01/2026";
     private boolean active = true;
@@ -7,30 +8,36 @@ public class Card {
     private boolean checkedIn = false;
     private String previousLocation = "Arnhem";
 
-    public boolean isActive() {
-        return active;
+    //    GETTERS
+    public boolean getActive() {
+        return this.active;
     }
 
-    public boolean isCheckedIn() {
-        return checkedIn;
+    public boolean getCheckedIn() {
+        return this.checkedIn;
     }
 
     public double getBalance() {
-        return balance;
+        return this.balance;
     }
 
     public int getCardID() {
-        return cardID;
+        return this.cardID;
     }
 
-    public double withdrawBalance(double amount) {
+    //    SETTERS
+    public void setCheckedIn(boolean newCheckInStatus) {
+        this.checkedIn = newCheckInStatus;
+    }
+
+    //    FUNCTIONS
+    public void withdrawBalance(double amount) {
         balance -= amount;
-        return balance;
     }
 
     public double calculatePrice(String location, String previousLocation) {
         double price = 0.0;
-        if ((previousLocation == "Arnhem") && (location == "Nijmegen")) {
+        if (previousLocation.equals("Arnhem") && location.equals("Nijmegen")) {
             price = 7.30;
         }
         return price;
@@ -38,9 +45,10 @@ public class Card {
 
     public void toggleCheckIn(String location) {
         if (!checkedIn) {
-            calculatePrice(location);
+            double price = calculatePrice(location, previousLocation);
+            withdrawBalance(price);
             checkedIn = true;
-            IO.println("Je bent nu ingechecked!");
+            IO.println("Je bent nu ingechecked! €" + price + " afgeschreven. Huidig saldo: €" + balance);
         } else {
             checkedIn = false;
             IO.println("Je bent nu uitgechecked!");

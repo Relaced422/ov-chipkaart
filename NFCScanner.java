@@ -1,15 +1,15 @@
 public class NFCScanner {
     Card card = new Card();
-    String ScannerLocation = "Nijmegen";
+    String scannerLocation = "Nijmegen";
 
     public void inchecken() {
-        if (card.isActive()) {
+        if (card.getActive()) {
             IO.println("(DEBUG) Kaart is actief");
-            if (!card.isCheckedIn()) {
+            if (!card.getCheckedIn()) {
                 IO.println("(DEBUG) Je bent nog niet ingechecked");
                 if (card.getBalance() >= 5) {
                     IO.println("(DEBUG) Saldo goedgekeurd (>5)");
-                    card.toggleCheckIn(ScannerLocation);
+                    card.toggleCheckIn(scannerLocation);
                 } else {
                     IO.println("Je hebt niet genoeg saldo! (minimum: 5)");
                 }
