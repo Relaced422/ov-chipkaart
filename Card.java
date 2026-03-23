@@ -1,5 +1,5 @@
 public class Card {
-    //    INIT
+    //    CARD INIT
     private int cardID = 1;
     private String expiry = "01/01/2026";
     private boolean active = true;

@@ -25,7 +25,8 @@ public class NFCScanner {
         if (card.getActive()) {
             System.out.println("(DEBUG) Kaart is actief");
             if (card.getCheckedIn()){
-
+                System.out.println("(DEBUG) Kaart is ingechecked");
+                card.toggleCheckIn("Arnhem");
             }
             else {}
         } else {
