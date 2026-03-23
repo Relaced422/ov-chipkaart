@@ -1,38 +1,37 @@
 public class NFCScanner {
-    Card card = new Card();
-    String scannerLocation = "Nijmegen";
+    private Card card;
+    private String location;
+
+    public NFCScanner(Card card, String location) {
+        this.card = card;
+        this.location = location;
+    }
 
     public void inchecken() {
-        if (card.getActive()) {
-            System.out.println("(DEBUG) Kaart is actief");
-            if (!card.getCheckedIn()) {
-                IO.println("(DEBUG) Je bent nog niet ingechecked");
-                if (card.getBalance() >= 5) {
-                    System.out.println("(DEBUG) Saldo goedgekeurd (>5)");
-                    card.toggleCheckIn(scannerLocation);
-                } else {
-                    System.out.println("Je hebt niet genoeg saldo! (minimum: 5)");
-                }
-            } else {
-                System.out.println("Je bent al ingecheckt!");
-            }
-        } else {
-            System.out.println("Kaart is ongeldig");
+        if (!card.getActive()) {
+            System.out.println("Kaart is ongeldig.");
+            return;
         }
+        if (card.getCheckedIn()) {
+            System.out.println("Je bent al ingechecked!");
+            return;
+        }
+        if (card.getBalance() < 5) {
+            System.out.println("Niet genoeg saldo om in te checken. (minimum: €5)");
+            return;
+        }
+        card.checkIn(location);
     }
 
     public void uitchecken() {
-        if (card.getActive()) {
-            System.out.println("(DEBUG) Kaart is actief");
-            if (card.getCheckedIn()){
-                System.out.println("(DEBUG) Kaart is ingechecked");
-                card.toggleCheckIn("Arnhem");
-            }
-            else {
-                System.out.println("(DEBUG) Kaart is niet ingechecked! Annuleren..");
-            }
-        } else {
-            System.out.println("Kaart is ongeldig");
+        if (!card.getActive()) {
+            System.out.println("Kaart is ongeldig.");
+            return;
         }
+        if (!card.getCheckedIn()) {
+            System.out.println("Je bent niet ingechecked.");
+            return;
+        }
+        card.checkOut(location);
     }
 }
