@@ -4,20 +4,32 @@ public class NFCScanner {
 
     public void inchecken() {
         if (card.getActive()) {
-            IO.println("(DEBUG) Kaart is actief");
+            System.out.println("(DEBUG) Kaart is actief");
             if (!card.getCheckedIn()) {
                 IO.println("(DEBUG) Je bent nog niet ingechecked");
                 if (card.getBalance() >= 5) {
-                    IO.println("(DEBUG) Saldo goedgekeurd (>5)");
+                    System.out.println("(DEBUG) Saldo goedgekeurd (>5)");
                     card.toggleCheckIn(scannerLocation);
                 } else {
-                    IO.println("Je hebt niet genoeg saldo! (minimum: 5)");
+                    System.out.println("Je hebt niet genoeg saldo! (minimum: 5)");
                 }
             } else {
-                IO.println("Je bent al ingecheckt!");
+                System.out.println("Je bent al ingecheckt!");
             }
         } else {
-            IO.println("Kaart is ongeldig");
+            System.out.println("Kaart is ongeldig");
+        }
+    }
+
+    public void uitchecken() {
+        if (card.getActive()) {
+            System.out.println("(DEBUG) Kaart is actief");
+            if (card.getCheckedIn()){
+
+            }
+            else {}
+        } else {
+            System.out.println("Kaart is ongeldig");
         }
     }
 }
