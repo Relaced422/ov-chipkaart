@@ -1,15 +1,34 @@
 public class NFCScanner {
-    private Card card;
-    private String location;
 
+    // --- Fields ---
+    private Card card;      // The OV-chipkaart being scanned
+    private String location; // The name of the station/stop where this scanner is located
 
-//    Make scanner info public to other classes
+    // --- Constructor ---
+
+    /**
+     * Creates a new NFCScanner tied to a specific card and location.
+     * Both values are set at construction and do not change during the scanner's lifetime.
+     *
+     * @param card     The card to read and operate on
+     * @param location The station or stop name where this scanner is placed (e.g. "Arnhem")
+     */
     public NFCScanner(Card card, String location) {
         this.card = card;
         this.location = location;
     }
 
-//    Checks active status, checkin status, confirms balance status =< 5 and then checks in
+    // --- Methods ---
+
+    /**
+     * Attempts to check the traveller in at this scanner's location.
+     * Performs three validations before checking in:
+     *  1. The card must be active
+     *  2. The traveller must not already be checked in
+     *  3. The balance must be more than €5 (minimum required to board)
+     *
+     * If any validation fails, an error message is printed and the check-in is aborted.
+     */
     public void inchecken() {
         if (!card.getActive()) {
             System.out.println("Kaart is ongeldig.");
@@ -26,7 +45,15 @@ public class NFCScanner {
         card.checkIn(location);
     }
 
-    //    Checks active status, checkin status and then checks out
+    /**
+     * Attempts to check the traveller out at this scanner's location.
+     * Performs two validations before checking out:
+     *  1. The card must be active
+     *  2. The traveller must currently be checked in
+     *
+     * If either validation fails, an error message is printed and the check-out is aborted.
+     * On success, the fare is calculated and deducted from the card balance via checkOut().
+     */
     public void uitchecken() {
         if (!card.getActive()) {
             System.out.println("Kaart is ongeldig.");
