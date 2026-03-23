@@ -19,18 +19,21 @@ public class Card {
         balance -= amount;
     }
 
+//    ONLY HARDCODED LOCATIONS NOW! Nijmegen - Arnhem = 7.30 Standard
     public double calculatePrice(String from, String to) {
         if (from.equals("Arnhem") && to.equals("Nijmegen")) return 7.30;
         if (from.equals("Nijmegen") && to.equals("Arnhem")) return 7.30;
         return 0.0;
     }
 
+//    Sets checkedin status to true and gives feedback
     public void checkIn(String location) {
         this.checkInLocation = location;
         this.checkedIn = true;
         System.out.println("Ingechecked op " + location + ". Huidig saldo: €" + balance);
     }
 
+//    Calculates price, sets checkedin status false, resets checkin location and gives feedback
     public void checkOut(String location) {
         double price = calculatePrice(this.checkInLocation, location);
         withdrawBalance(price);
@@ -39,6 +42,7 @@ public class Card {
         System.out.println("Uitgechecked op " + location + ". €" + price + " afgeschreven. Huidig saldo: €" + balance);
     }
 
+//    Prints cardID, Active status, balance, checkedIn Status, location
     public void printInfo() {
         System.out.println("=== Kaartinfo ===");
         System.out.println("Kaart ID:    " + cardID);

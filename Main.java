@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 void main() {
+//    CLASS INIT
     Card card = new Card();
     NFCScanner scannerNijmegen = new NFCScanner(card, "Nijmegen");
     NFCScanner scannerArnhem = new NFCScanner(card, "Arnhem");
@@ -8,6 +9,7 @@ void main() {
     Scanner input = new Scanner(System.in);
 
     while (true) {
+//        Switch case always active
         System.out.println("\nOpties: inchecken | uitchecken | saldo | info | stop");
         String keuze = input.nextLine().trim().toLowerCase();
 
