@@ -9,6 +9,17 @@ public class Card {
     private boolean checkedIn = false;       // Whether the traveller is currently checked in
     private String checkInLocation = null;   // The location where the traveller checked in (null if not checked in)
 
+    // Ordered list of stations on this line — add more stops here to extend the route
+    public static final String[] STATIONS = {
+            "Nijmegen",
+            "Arnhem",
+            "Utrecht Centraal",
+            "Amsterdam Centraal"
+    };
+
+    // Price charged per stop passed through
+    private static final double PRICE_PER_STOP = 3.65;
+
     // --- Getters ---
     public boolean getActive() { return this.active; }
     public boolean getCheckedIn() { return this.checkedIn; }
@@ -20,37 +31,42 @@ public class Card {
 
     /**
      * Deducts the given amount from the card balance.
-     * Does not validate whether sufficient funds are available.
+     * Pass a negative value to add funds (used by Laadpunt).
      *
-     * @param amount The amount in euros to deduct
+     * @param amount The amount in euros to deduct (negative = top up)
      */
     public void withdrawBalance(double amount) {
         balance -= amount;
     }
 
     /**
-     * Returns the travel price between two hardcoded locations.
-     * Currently only supports routes between Arnhem and Nijmegen.
-     * Returns 0.0 for any unsupported route.
+     * Calculates the travel price based on how many stops lie between
+     * the departure and arrival stations.
+     * Price = number of stops passed × PRICE_PER_STOP.
+     * Returns 0.0 if either station is not found on the line.
      *
-     * TODO: Replace with dynamic pricing based on distance or a pricing table.
-     *
-     * @param from  Departure location
-     * @param to    Destination location
-     * @return      Price in euros, or 0.0 if the route is not recognised
+     * @param from  Departure station name
+     * @param to    Arrival station name
+     * @return      Total price in euros
      */
     public double calculatePrice(String from, String to) {
-        if (from.equals("Arnhem") && to.equals("Nijmegen")) return 7.30;
-        if (from.equals("Nijmegen") && to.equals("Arnhem")) return 7.30;
-        return 0.0;
+        int fromIndex = -1, toIndex = -1;
+
+        for (int i = 0; i < STATIONS.length; i++) {
+            if (STATIONS[i].equalsIgnoreCase(from)) fromIndex = i;
+            if (STATIONS[i].equalsIgnoreCase(to))   toIndex   = i;
+        }
+
+        if (fromIndex == -1 || toIndex == -1) return 0.0;
+
+        return Math.abs(toIndex - fromIndex) * PRICE_PER_STOP;
     }
 
     /**
      * Checks the traveller in at the given location.
      * Stores the check-in location and marks the card as checked in.
-     * Does not validate card status or balance before checking in.
      *
-     * @param location The name of the check-in location (e.g. "Arnhem")
+     * @param location The name of the departure station
      */
     public void checkIn(String location) {
         this.checkInLocation = location;
@@ -60,10 +76,10 @@ public class Card {
 
     /**
      * Checks the traveller out at the given location.
-     * Calculates the fare based on the check-in and check-out locations,
-     * deducts it from the balance, and resets the check-in state.
+     * Calculates the fare based on stops passed, deducts it from
+     * the balance, and resets the check-in state.
      *
-     * @param location The name of the check-out location (e.g. "Nijmegen")
+     * @param location The name of the arrival station
      */
     public void checkOut(String location) {
         double price = calculatePrice(this.checkInLocation, location);

@@ -4,13 +4,11 @@ void main() {
 
     // --- Initialisation ---
 
-    // Create a single card shared across all scanners and the top-up terminal,
-    // simulating one physical OV-chipkaart being used throughout the journey
-    Card card = new Card();
-    NFCScanner scannerNijmegen = new NFCScanner(card, "Nijmegen");
-    NFCScanner scannerArnhem   = new NFCScanner(card, "Arnhem");
-    Laadpunt laadpunt          = new Laadpunt(card);
-    Scanner input              = new Scanner(System.in);
+    // One card, one shared scanner terminal, one top-up point
+    Card card         = new Card();
+    NFCScanner nfc    = new NFCScanner(card);
+    Laadpunt laadpunt = new Laadpunt(card);
+    Scanner input     = new Scanner(System.in);
 
     // --- Main loop ---
 
@@ -20,11 +18,11 @@ void main() {
         String keuze = input.nextLine().trim().toLowerCase();
 
         switch (keuze) {
-            // Check in at Nijmegen (hardcoded as the departure station for this simulation)
-            case "inchecken"  -> scannerNijmegen.inchecken();
+            // Prompts user for departure station, then checks in
+            case "inchecken"  -> nfc.inchecken();
 
-            // Check out at Arnhem (hardcoded as the arrival station for this simulation)
-            case "uitchecken" -> scannerArnhem.uitchecken();
+            // Prompts user for arrival station, then checks out and bills by stops passed
+            case "uitchecken" -> nfc.uitchecken();
 
             // Show current balance, then prompt the user to top up
             case "saldo"      -> {
