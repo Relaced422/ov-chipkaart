@@ -13,6 +13,7 @@ void main() {
         System.out.println("\nOpties: inchecken | uitchecken | saldo | info | stop");
         String keuze = input.nextLine().trim().toLowerCase();
 
+//        Keuze menu
         switch (keuze) {
             case "inchecken"   -> scannerNijmegen.inchecken();
             case "uitchecken"  -> scannerArnhem.uitchecken();
