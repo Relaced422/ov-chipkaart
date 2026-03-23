@@ -28,7 +28,9 @@ public class NFCScanner {
                 System.out.println("(DEBUG) Kaart is ingechecked");
                 card.toggleCheckIn("Arnhem");
             }
-            else {}
+            else {
+                System.out.println("(DEBUG) Kaart is niet ingechecked! Annuleren..");
+            }
         } else {
             System.out.println("Kaart is ongeldig");
         }
