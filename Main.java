@@ -35,6 +35,7 @@ void main() {
 
             // Print a full summary of the card's current state
             case "info"       -> card.printInfo();
+            case "test" -> nfc.berekenAfstand();
 
             // Exit the program cleanly
             case "stop"       -> { System.out.println("Tot ziens!"); return; }

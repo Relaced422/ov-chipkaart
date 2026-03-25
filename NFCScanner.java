@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.lang.Math;
 
 public class NFCScanner {
 
@@ -25,9 +26,9 @@ public class NFCScanner {
      * Attempts to check the traveller in.
      * Prompts the user to choose a departure station from the route,
      * then performs three validations before checking in:
-     *  1. The card must be active
-     *  2. The traveller must not already be checked in
-     *  3. The balance must be more than €5 (minimum required to board)
+     * 1. The card must be active
+     * 2. The traveller must not already be checked in
+     * 3. The balance must be more than €5 (minimum required to board)
      */
     public void inchecken() {
         if (!card.getActive()) {
@@ -53,9 +54,9 @@ public class NFCScanner {
      * Attempts to check the traveller out.
      * Prompts the user to choose an arrival station from the route,
      * then performs two validations before checking out:
-     *  1. The card must be active
-     *  2. The traveller must currently be checked in
-     *
+     * 1. The card must be active
+     * 2. The traveller must currently be checked in
+     * <p>
      * On success, the fare is calculated based on stops passed and deducted.
      */
     public void uitchecken() {
@@ -79,8 +80,8 @@ public class NFCScanner {
      * the user to pick one by number.
      * Returns the chosen station name, or null if the input was invalid.
      *
-     * @param prompt  The question shown to the user
-     * @return        The selected station name, or null on invalid input
+     * @param prompt The question shown to the user
+     * @return The selected station name, or null on invalid input
      */
     private String promptStation(String prompt) {
         System.out.println(prompt);
@@ -101,5 +102,38 @@ public class NFCScanner {
             System.out.println("Voer een getal in.");
             return null;
         }
+    }
+
+    public double berekenAfstand() {
+        String prev_Loc = "Nijmegen";
+        String cur_Loc = "Arnhem";
+
+        double startx = 0, starty = 0;
+        double endx = 0, endy = 0;
+
+        // Startcoördinaten
+        if (prev_Loc.equals("Nijmegen")) {
+            startx = 1.0;
+            starty = 1.0;
+        } else if (prev_Loc.equals("Arnhem")) {
+            startx = 3.0;
+            starty = 3.0;
+        }
+
+        // Eindcoördinaten
+        if (cur_Loc.equals("Nijmegen")) {
+            endx = 1.0;
+            endy = 1.0;
+        } else if (cur_Loc.equals("Arnhem")) {
+            endx = 3.0;
+            endy = 3.0;
+        }
+
+        // Afstand berekenen
+        double a = startx - endx;
+        double b = starty - endy;
+        double c = Math.sqrt(a * a + b * b);
+        System.out.println(c);
+        return c;
     }
 }
