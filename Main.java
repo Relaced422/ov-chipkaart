@@ -6,9 +6,11 @@ void main() {
 
     Locatie arnhem   = new Locatie("Arnhem", 10.0, 20.0);
     Locatie nijmegen = new Locatie("Nijmegen", 5.0, 5.0);
+    Locatie tokyo = new Locatie("Tokyo", 60.0, 300.0);
 
     NFCScanner scannerArnhem   = new NFCScanner(card, arnhem);
     NFCScanner scannerNijmegen = new NFCScanner(card, nijmegen);
+    NFCScanner scannerTokyo = new NFCScanner(card, tokyo);
     Laadpunt laadpunt = new Laadpunt(card);
 
     while (true) {
@@ -17,11 +19,12 @@ void main() {
 
         switch (keuze) {
             case "inchecken", "uitchecken" -> {
-                System.out.println("Bij welk station? (arnhem | nijmegen)");
+                System.out.println("Bij welk station? (arnhem | nijmegen | tokyo)");
                 String station = input.nextLine().trim().toLowerCase();
                 NFCScanner scanner = switch (station) {
                     case "arnhem"   -> scannerArnhem;
                     case "nijmegen" -> scannerNijmegen;
+                    case "tokyo" -> scannerTokyo;
                     default         -> null;
                 };
                 if (scanner == null) { System.out.println("Onbekend station."); break; }

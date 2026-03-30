@@ -26,7 +26,14 @@ public class Card {
         return checkInLocation;
     }
 
-    public void withdrawBalance(double amount) {balance -= amount;}
+    public void withdrawBalance(double amount) {
+        balance -= amount;
+        if (amount < 0) {
+            System.out.print("€" + -amount + " opgeladen. Nieuw saldo: " + balance);
+        } else if (amount > 0) {
+            System.out.print("€" + amount + " afgetrokken. Nieuw saldo: " + balance);
+        }
+    }
 
 public void checkIn(Locatie location) {
     checkInLocation = location;
