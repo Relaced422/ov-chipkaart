@@ -35,6 +35,9 @@ public class Card {
         }
     }
 
+    public void depositBalance(double amount) {
+    }
+
 public void checkIn(Locatie location) {
     checkInLocation = location;
     checkedIn = true;
