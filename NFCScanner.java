@@ -22,7 +22,6 @@ public class NFCScanner {
         System.out.println("Afstand: " + afstand + " km");
         double prijs = berekenPrijs(afstand);
         card.withdrawBalance(prijs);
-
     }
 
     public double berekenPrijs(double afstand) {
