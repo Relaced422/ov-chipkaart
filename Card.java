@@ -10,6 +10,10 @@ public class Card {
     private Locatie checkInLocation = null;
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
+    public void setActive(boolean status) {
+        active = status;
+    }
+
     public boolean getActive() {
         return active;
     }

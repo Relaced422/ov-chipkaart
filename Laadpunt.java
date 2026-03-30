@@ -10,6 +10,9 @@ public class Laadpunt {
         card.depositBalance(amount);
         System.out.println(amount + " opgewaardeerd");
         System.out.println("nieuw saldo: " + card.getBalance());
-
+        if (card.getBalance() > 0) {
+            card.setActive(true);
+            System.out.println("Uw kaart is weer actief");
+        }
     }
 }
