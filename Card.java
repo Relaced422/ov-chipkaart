@@ -36,6 +36,7 @@ public class Card {
     }
 
     public void depositBalance(double amount) {
+        balance += amount;
     }
 
 public void checkIn(Locatie location) {
