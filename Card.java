@@ -33,9 +33,9 @@ public class Card {
     public void withdrawBalance(double amount) {
         balance -= amount;
         if (amount < 0) {
-            System.out.print("€" + -amount + " opgeladen. Nieuw saldo: " + balance);
+            System.out.print("€" + -amount + " opgeladen. Nieuw saldo: " + df.format(balance));
         } else if (amount > 0) {
-            System.out.print("€" + amount + " afgetrokken. Nieuw saldo: " + balance);
+            System.out.print("€" + amount + " afgetrokken. Nieuw saldo: " + df.format(balance));
         }
     }
 
@@ -43,24 +43,24 @@ public class Card {
         balance += amount;
     }
 
-public void checkIn(Locatie location) {
-    checkInLocation = location;
-    checkedIn = true;
-    System.out.println("Ingechecked op " + checkInLocation.getNaam() + ". Saldo: €" + df.format(balance));
-}
+    public void checkIn(Locatie location) {
+        checkInLocation = location;
+        checkedIn = true;
+        System.out.println("Ingechecked op " + checkInLocation.getNaam() + ". Saldo: €" + df.format(balance));
+    }
 
-public void checkOut(Locatie location) {
-    checkedIn = false;
-    checkInLocation = null;
-    System.out.println("Uitgechecked op " + location.getNaam() + ". Saldo: €" + df.format(balance));
-}
+    public void checkOut(Locatie location) {
+        checkedIn = false;
+        checkInLocation = null;
+        System.out.println("Uitgechecked op " + location.getNaam() + ". Saldo: €" + df.format(balance));
+    }
 
-public void printInfo() {
-    System.out.println("=== Kaartinfo ===");
-    System.out.println("Kaart ID:    " + cardID);
-    System.out.println("Actief:      " + active);
-    System.out.println("Saldo:       €" + balance + " (niet afgerond)");
-    System.out.println("Ingechecked: " + checkedIn);
-    System.out.println("Locatie:     " + (checkInLocation != null ? checkInLocation.getNaam() : "N/A"));
-}
+    public void printInfo() {
+        System.out.println("=== Kaartinfo ===");
+        System.out.println("Kaart ID:    " + cardID);
+        System.out.println("Actief:      " + active);
+        System.out.println("Saldo:       €" + balance + " (niet afgerond)");
+        System.out.println("Ingechecked: " + checkedIn);
+        System.out.println("Locatie:     " + (checkInLocation != null ? checkInLocation.getNaam() : "N/A"));
+    }
 }
