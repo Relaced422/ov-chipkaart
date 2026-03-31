@@ -35,6 +35,6 @@ public class NfcScanner {
     }
 
     public double calculatePrice(double distance) {
-        return distance * 1.6;
+        return distance * 0.20;
     }
 }
