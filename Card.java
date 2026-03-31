@@ -33,9 +33,9 @@ public class Card {
     public void withdrawBalance(double amount) {
         balance -= amount;
         if (amount < 0) {
-            System.out.print("€" + -amount + " opgeladen. Nieuw saldo: " + df.format(balance));
+            System.out.print("€" + -amount + " opgeladen. Nieuw saldo: " + df.format(balance) + "(afgerond)");
         } else if (amount > 0) {
-            System.out.print("€" + amount + " afgetrokken. Nieuw saldo: " + df.format(balance));
+            System.out.print("€" + amount + " afgetrokken. Nieuw saldo: " + df.format(balance) + "(afgerond)");
         }
     }
 
@@ -46,13 +46,13 @@ public class Card {
     public void checkIn(Locatie location) {
         checkInLocation = location;
         checkedIn = true;
-        System.out.println("Ingechecked op " + checkInLocation.getNaam() + ". Saldo: €" + df.format(balance));
+        System.out.println("Ingechecked op " + checkInLocation.getNaam() + ". Saldo: €" + df.format(balance) + "(afgerond)");
     }
 
     public void checkOut(Locatie location) {
         checkedIn = false;
         checkInLocation = null;
-        System.out.println("Uitgechecked op " + location.getNaam() + ". Saldo: €" + df.format(balance));
+        System.out.println("Uitgechecked op " + location.getNaam() + ". Saldo: €" + df.format(balance) + "(afgerond)");
     }
 
     public void printInfo() {
@@ -61,6 +61,6 @@ public class Card {
         System.out.println("Actief:      " + active);
         System.out.println("Saldo:       €" + balance + " (niet afgerond)");
         System.out.println("Ingechecked: " + checkedIn);
-        System.out.println("Locatie:     " + (checkInLocation != null ? checkInLocation.getNaam() : "N/A"));
+        System.out.println("Locatie:     " + (checkInLocation != null ? checkInLocation.getNaam() : "N.V.T."));
     }
 }
