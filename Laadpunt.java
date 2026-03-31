@@ -10,7 +10,7 @@ public class Laadpunt {
 
     public void laadSaldo(String opwaardeerKeuze) {
         switch (opwaardeerKeuze) {
-            case "Opladen" -> {
+            case "opladen" -> {
                 System.out.println("Hoeveel wil je opwaarderen?");
                 double amount = Double.parseDouble(scanner.nextLine().replace(",", "."));
                 if (amount <= 0) { System.out.println("Ongeldig bedrag."); return; }
@@ -22,7 +22,7 @@ public class Laadpunt {
                     System.out.println("Uw kaart is weer actief");
                 }
             }
-            case "OpladenTot" -> {
+            case "opladentot" -> {
                 System.out.print("Voer het gewenste saldo in: ");
                 double targetBalance = scanner.nextDouble();
                 if (targetBalance <= 0) { System.out.println("Ongeldig bedrag."); return; }

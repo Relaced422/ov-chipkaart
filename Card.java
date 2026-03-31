@@ -4,11 +4,15 @@ import java.text.DecimalFormat;
 public class Card {
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
-    private int cardID = 1;
-    private boolean active = true;
-    private double balance = 50.0;
+    private int cardID;
+    private boolean active = false;
+    private double balance = 0;
     private boolean checkedIn = false;
     private Locatie checkInLocation = null;
+
+    public Card(int cardID) {
+        this.cardID = cardID;
+    }
 
     public void setActive(boolean status) {
         active = status;

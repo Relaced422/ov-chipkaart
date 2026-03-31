@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 void main() {
 
-    Card card     = new Card();
+    Card card     = new Card(200);
     Scanner input = new Scanner(System.in);
 
     Locatie arnhem   = new Locatie("Arnhem", 10.0, 20.0);
@@ -34,7 +34,7 @@ void main() {
             }
             case "saldo" -> {
                 System.out.println("Huidig saldo: €" + card.getBalance());
-                System.out.println("Oplaadmethode? (Opladen | OpladenTot)");
+                System.out.println("Oplaadmethode? (opladen | opladentot)");
                 String opwaardeerKeuze = input.nextLine().trim();
                 laadpunt.laadSaldo(opwaardeerKeuze);
             }
