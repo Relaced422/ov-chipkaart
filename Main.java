@@ -33,9 +33,11 @@ void main() {
             }
             case "saldo" -> {
                 System.out.println("Huidig saldo: €" + card.getBalance());
+                System.out.println("Oplaadmethode? (Opladen | OpladenTot)");
+                String opwaardeerKeuze = input.nextLine().trim();
                 System.out.println("Hoeveel wil je opwaarderen?");
                 double amount = Double.parseDouble(input.nextLine().replace(",", "."));
-                laadpunt.laadSaldo(amount);
+                laadpunt.laadSaldo(amount, opwaardeerKeuze);
             }
             case "info" -> card.printInfo();
             case "stop" -> { System.out.println("Tot ziens!"); return; }
