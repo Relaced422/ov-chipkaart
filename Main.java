@@ -1,70 +1,67 @@
 import java.util.Scanner;
-import java.lang.Math;
 
 void main() {
-    //    Decide random numbers
-    int rand  = (int) (Math.random() * 9000) + 1000;
-    int rand1 = (int) (Math.random() * 9000) + 1000;
-    int rand2 = (int) (Math.random() * 9000) + 1000;
+    int idOne   = (int) (Math.random() * 9000) + 1000;
+    int idTwo   = (int) (Math.random() * 9000) + 1000;
+    int idThree = (int) (Math.random() * 9000) + 1000;
 
-    Card card  = new Card(rand);
-    Card card1 = new Card(rand1);
-    Card card2 = new Card(rand2);
-    Scanner input = new Scanner(System.in);
+    Card cardOne   = new Card(idOne);
+    Card cardTwo   = new Card(idTwo);
+    Card cardThree = new Card(idThree);
+    Scanner input  = new Scanner(System.in);
 
-    Locatie arnhem   = new Locatie("Arnhem", 10.0, 20.0);
-    Locatie nijmegen = new Locatie("Nijmegen", 5.0, 5.0);
-    Locatie tokyo    = new Locatie("Tokyo", 60.0, 300.0);
+    Location arnhem   = new Location("Arnhem",   10.0, 20.0);
+    Location nijmegen = new Location("Nijmegen",  5.0,  5.0);
+    Location tokyo    = new Location("Tokyo",    60.0, 300.0);
 
     while (true) {
-        // Card selection
         System.out.println("\nKies een kaart:");
-        System.out.println("1. Kaart " + rand);
-        System.out.println("2. Kaart " + rand1);
-        System.out.println("3. Kaart " + rand2);
+        System.out.println("1. Kaart " + idOne);
+        System.out.println("2. Kaart " + idTwo);
+        System.out.println("3. Kaart " + idThree);
         System.out.println("0. Afsluiten");
 
         Card selectedCard = null;
         while (selectedCard == null) {
-            String cardKeuze = input.nextLine().trim();
-            if (cardKeuze.equals("0")) { System.out.println("Tot ziens!"); return; }
-            selectedCard = switch (cardKeuze) {
-                case "1" -> card;
-                case "2" -> card1;
-                case "3" -> card2;
+            String cardChoice = input.nextLine().trim();
+            if (cardChoice.equals("0")) { System.out.println("Tot ziens!"); return; }
+            selectedCard = switch (cardChoice) {
+                case "1" -> cardOne;
+                case "2" -> cardTwo;
+                case "3" -> cardThree;
                 default  -> { System.out.println("Ongeldige keuze, kies 1, 2 of 3."); yield null; }
             };
         }
 
-        NFCScanner scannerArnhem   = new NFCScanner(selectedCard, arnhem);
-        NFCScanner scannerNijmegen = new NFCScanner(selectedCard, nijmegen);
-        NFCScanner scannerTokyo    = new NFCScanner(selectedCard, tokyo);
-        Laadpunt laadpunt = new Laadpunt(selectedCard);
+        NfcScanner scannerArnhem   = new NfcScanner(selectedCard, arnhem);
+        NfcScanner scannerNijmegen = new NfcScanner(selectedCard, nijmegen);
+        NfcScanner scannerTokyo    = new NfcScanner(selectedCard, tokyo);
+        ChargingStation chargingStation = new ChargingStation(selectedCard);
 
         boolean loggedIn = true;
         while (loggedIn) {
             System.out.println("\nOpties: inchecken | uitchecken | saldo | info | stop");
-            String keuze = input.nextLine().trim().toLowerCase();
+            String choice = input.nextLine().trim().toLowerCase();
 
-            switch (keuze) {
+            switch (choice) {
                 case "inchecken", "uitchecken" -> {
                     System.out.println("Bij welk station? (arnhem | nijmegen | tokyo)");
                     String station = input.nextLine().trim().toLowerCase();
-                    NFCScanner scanner = switch (station) {
+                    NfcScanner scanner = switch (station) {
                         case "arnhem"   -> scannerArnhem;
                         case "nijmegen" -> scannerNijmegen;
                         case "tokyo"    -> scannerTokyo;
                         default         -> null;
                     };
                     if (scanner == null) { System.out.println("Onbekend station."); break; }
-                    if (keuze.equals("inchecken")) scanner.inchecken();
-                    else scanner.uitchecken();
+                    if (choice.equals("inchecken")) scanner.checkIn();
+                    else scanner.checkOut();
                 }
                 case "saldo" -> {
                     System.out.println("Huidig saldo: €" + selectedCard.getBalance());
                     System.out.println("Oplaadmethode? (opladen | opladentot)");
-                    String opwaardeerKeuze = input.nextLine().trim();
-                    laadpunt.laadSaldo(opwaardeerKeuze);
+                    String chargeChoice = input.nextLine().trim();
+                    chargingStation.chargeSaldo(chargeChoice);
                 }
                 case "info"  -> selectedCard.printInfo();
                 case "stop"  -> { System.out.println("Uitgelogd."); loggedIn = false; }
