@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 void main() {
+
     Card card     = new Card();
     Scanner input = new Scanner(System.in);
 

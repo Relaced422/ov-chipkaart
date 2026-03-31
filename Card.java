@@ -2,12 +2,13 @@ import java.text.DecimalFormat;
 
 
 public class Card {
+    private static final DecimalFormat df = new DecimalFormat("0.00");
+
     private int cardID = 1;
     private boolean active = true;
     private double balance = 50.0;
     private boolean checkedIn = false;
     private Locatie checkInLocation = null;
-    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public void setActive(boolean status) {
         active = status;
@@ -17,9 +18,7 @@ public class Card {
         return active;
     }
 
-    public boolean getCheckedIn() {
-        return checkedIn;
-    }
+    public boolean getCheckedIn() { return checkedIn; }
 
     public double getBalance() {
         return balance;
