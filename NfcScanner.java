@@ -12,6 +12,8 @@ public class NfcScanner {
         if (card.isCheckedIn())           { System.out.println("Je bent al ingechecked!");                                  return; }
         if (card.getBalance() <= 5)       { System.out.println("Niet genoeg saldo. (minimum: €5)");                        return; }
         card.checkIn(location);
+        card.withdrawBalance(5.0);
+        System.out.println("Instaptarief betaald (€5)");
     }
 
     public void checkOut() {
@@ -21,6 +23,8 @@ public class NfcScanner {
         card.checkOut(location);
         System.out.println("Afstand: " + distance + " km");
         double price = calculatePrice(distance);
+        card.depositBalance(5.0);
+        System.out.println("Instaptarief terug gekregen (€5)");
         card.withdrawBalance(price);
         if (card.getBalance() < 0) {
             card.setActive(false);
