@@ -1,8 +1,11 @@
 import java.util.Scanner;
+import java.lang.Math;
 
 void main() {
+//    Decide random number
+    int rand = (int) (Math.random() * 9000) + 1000;
 
-    Card card     = new Card(200);
+    Card card     = new Card(rand);
     Scanner input = new Scanner(System.in);
 
     Locatie arnhem   = new Locatie("Arnhem", 10.0, 20.0);
