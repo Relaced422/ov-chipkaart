@@ -20,11 +20,12 @@ public class Card {
     public Location getCheckInLocation()    { return checkInLocation; }
 
     public void withdrawBalance(double amount) {
+//        Moet nog aangepast worden, niet toestaan van min getallen in withdraw.
         balance -= amount;
         if (amount < 0) {
             System.out.println("€" + -amount + " opgeladen. Nieuw saldo: €" + df.format(balance) + " (afgerond)");
         } else if (amount > 0) {
-            System.out.println("€" + amount + " afgetrokken. Nieuw saldo: €" + df.format(balance) + " (afgerond)");
+            System.out.println("€" + amount + " afgeschreven. Nieuw saldo: €" + df.format(balance) + " (afgerond)");
         }
     }
 
